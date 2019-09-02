@@ -5,12 +5,16 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mkhglab.kotlintabbar.fragments.HistoryFragment
-import com.mkhglab.kotlintabbar.fragments.HomeFragment
-import com.mkhglab.kotlintabbar.fragments.ProfileFragment
-import com.mkhglab.kotlintabbar.fragments.SettingsFragment
+import com.mkhglab.kotlintabbar.fragments.history.HistoryFragment
+import com.mkhglab.kotlintabbar.fragments.history.HistoryListener
+import com.mkhglab.kotlintabbar.fragments.home.HomeFragment
+import com.mkhglab.kotlintabbar.fragments.profile.ProfileFragment
+import com.mkhglab.kotlintabbar.fragments.settings.SettingsFragment
+import com.mkhglab.kotlintabbar.fragments.home.HomeListener
+import com.mkhglab.kotlintabbar.fragments.profile.ProfileListener
+import com.mkhglab.kotlintabbar.fragments.settings.SettingsListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HomeListener, HistoryListener, ProfileListener, SettingsListener {
 
     lateinit var toolbar: ActionBar
 
@@ -24,32 +28,41 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         toolbar = supportActionBar!!
+
+        homeFragment.mInterface = this
+        historyFragment.mInterface = this
+        profileFragment.mInterface = this
+        settingsFragment.mInterface = this
+
         val bottomNavigation: BottomNavigationView = findViewById(R.id.navigationView)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        toolbar.title = homeFragment.title
         openFragment(homeFragment)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            finish()
+        }
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                toolbar.title = homeFragment.title
                 openFragment(homeFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_history -> {
-                toolbar.title = historyFragment.title
                 openFragment(historyFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
-                toolbar.title = profileFragment.title
                 openFragment(profileFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_settings -> {
-                toolbar.title = settingsFragment.title
                 openFragment(settingsFragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -58,9 +71,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openFragment(fragment: Fragment) {
+
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        }
+
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    //HomeListener
+    override fun homeLoaded() {
+        toolbar.title = homeFragment.title
+    }
+
+    //HistoryListener
+    override fun historyLoaded() {
+        toolbar.title = historyFragment.title
+    }
+
+    //ProfileListener
+    override fun profileLoaded() {
+        toolbar.title = profileFragment.title
+    }
+
+    //SettingsListener
+    override fun settingsLoaded() {
+        toolbar.title = settingsFragment.title
     }
 }
