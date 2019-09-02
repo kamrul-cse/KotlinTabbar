@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_settings"
+        android:orderInCategory="11"
+        android:title="Group"
+        android:icon="@drawable/icons8_group_objects_60px"
+        app:showAsAction="always"/>
+</menu>

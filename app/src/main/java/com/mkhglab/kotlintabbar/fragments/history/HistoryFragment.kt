@@ -1,9 +1,7 @@
 package com.mkhglab.kotlintabbar.fragments.history
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import com.mkhglab.kotlintabbar.R
 
@@ -17,7 +15,14 @@ class HistoryFragment: Fragment() {
 
         mInterface?.historyLoaded()
 
+        setHasOptionsMenu(true)
+
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_history_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     companion object {
