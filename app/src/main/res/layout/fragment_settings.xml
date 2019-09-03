@@ -8,6 +8,7 @@
     android:padding="16dp">
 
     <LinearLayout
+        android:id="@+id/changePINLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,20 +17,22 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/icons8_home_48px"/>
+            android:src="@drawable/icons8_password_52px"
+            android:tint="#d3d3d3"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Change PIN"
             android:textSize="20sp"
-            android:layout_marginLeft="8dp"/>
+            android:padding="8dp"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="#EDEDED"/>
 
     <LinearLayout
+        android:id="@+id/moreAppsLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -38,18 +41,39 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/icons8_home_48px"/>
+            android:src="@drawable/icons8_approval_64px"
+            android:tint="#d3d3d3"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="About Us"
+            android:text="More Apps"
             android:textSize="20sp"
-            android:layout_marginLeft="8dp"/>
+            android:padding="8dp"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="#EDEDED"/>
+
+    <LinearLayout
+        android:id="@+id/logoutLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icons8_logout_rounded_left_filled_100px"
+            android:tint="#d3d3d3"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textSize="20sp"
+            android:padding="8dp"/>
+    </LinearLayout>
 
 
 </LinearLayout>
